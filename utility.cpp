@@ -12,17 +12,16 @@ int hex_to_dec(string s)
 			mul*=16;
 		}
 		result+=char_to_int[s[i]]*mul;
-		cout<<char_to_int[s[i]]<<" "<<result<<"\n";
+		//cout<<char_to_int[s[i]]<<" "<<result<<"\n";
 		++pow;
 	}
 	return result;
 }
 
-string dec_to_hex(int number,bool bit_8_16)
+string dec_to_hex(int &number)
 {
 	int shift_bit=1,shifting=8,counter=1,dec_val=0,mul_val=1;
 	string hex_val;
-	if(b)shifting=16;3
 	for(int i=0;i<shifting;++i)
 	{
 		if(number&shift_bit)dec_val+=mul_val;
@@ -32,8 +31,13 @@ string dec_to_hex(int number,bool bit_8_16)
 			hex_val.push_back(int_to_char[dec_val]);
 			dec_val=0;
 		}
-		mul_val*=2;
+		else
+		{
+			mul_val*=2;
+			++counter;
+		}
 		shift_bit<<=1;
 	}
-	return result;
+	reverse(hex_val.begin(),hex_val.end());
+	return hex_val;
 }

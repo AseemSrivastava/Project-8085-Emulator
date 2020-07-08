@@ -28,7 +28,7 @@ unordered_map<string,pair<int,char>>mnemonics{
 	{"CMA",{25,'1'}},
 	{"CMP",{26,'1'}},
 	{"EOF",{27,'0'}},
-	{"HELP",{28,'0'}},
+	{"HELP",{28,'0'}}
 };	
 
 unordered_map<char,int>char_to_int{
@@ -47,7 +47,7 @@ unordered_map<char,int>char_to_int{
 	{'C',12},
 	{'D',13},
 	{'E',14},
-	{'F',15},
+	{'F',15}
 };
 
 unordered_map<int,char>int_to_char{
@@ -66,5 +66,5 @@ unordered_map<int,char>int_to_char{
 	{12,'C'},
 	{13,'D'},
 	{14,'E'},
-	{15,'F'},
+	{15,'F'}
 };
