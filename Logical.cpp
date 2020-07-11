@@ -9,7 +9,7 @@ void CMA()
 void CMP(string &user_instruction)
 {
 	SF=0,ZF=0,AC=0,PF=0,CF=0;
-	int tmp;
+	int tmp=0;
 	switch(user_instruction[4])
 	{
 		case 'A':
@@ -34,7 +34,8 @@ void CMP(string &user_instruction)
 				tmp=flag_on_off_8bit_SUB(A,L);
 				break;
 		default: 
-				cout<<"You found a bug!";
+				error = 1;
+				cout<<"You found a bug!\n";
 	}
 	cout<<tmp<<"\n";
 }
