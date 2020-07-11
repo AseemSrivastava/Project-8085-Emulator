@@ -108,7 +108,7 @@ int main()
 		next_address+=mnemonics[mne].second-'0';
 	}
 
-	bool eof=0,jump_setter=0,no_extra_print = 0,jump=0;
+	bool eof=0,jump_setter=0,no_extra_print = 0,jump=0,other_jump = 0;
 	end_address = next_address;
 	next_address = hex_to_dec(starting_address);
 	while(next_address<end_address)
@@ -130,6 +130,7 @@ int main()
 				display_content[next_address]+=user_instruction;
 				for(int i=display_content[next_address].size();i<=25;++i)display_content[next_address].push_back(' ');
 			}
+			no_extra_print = 0;
 			for(int i=0;i<user_instruction.size();++i)user_instruction[i]=toupper(user_instruction[i]);
 			mne = "";
 			i=0;
@@ -188,7 +189,18 @@ int main()
 						{
 							jump_setter = 1;
 							no_extra_print = 1;
+							other_jump = 1;
+							display_content[next_address]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
+							display_content[next_address]+=dec_to_hex(A)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(B)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(C)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(D)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(E)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(H)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(L)+"H";
+							int temp = next_address;
 							error = JC(user_instruction,next_address);
+							if(temp<next_address)no_extra_print = 0;
 						}
 						break;
 				case 13:
@@ -196,7 +208,18 @@ int main()
 						{
 							jump_setter = 1;
 							no_extra_print = 1;
+							other_jump = 1;
+							display_content[next_address]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
+							display_content[next_address]+=dec_to_hex(A)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(B)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(C)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(D)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(E)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(H)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(L)+"H";
+							int temp = next_address;
 							error = JNC(user_instruction,next_address); //
+							if(temp<next_address)no_extra_print = 0;
 						}
 						break;
 				case 14:
@@ -204,16 +227,36 @@ int main()
 						{
 							jump_setter = 1;
 							no_extra_print = 1;
+							other_jump = 1;
+							display_content[next_address]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
+							display_content[next_address]+=dec_to_hex(A)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(B)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(C)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(D)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(E)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(H)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(L)+"H";
+							int temp = next_address;
 							error = JZ(user_instruction,next_address); //
-							cout<<next_address<<"\n";
+							if(temp<next_address)no_extra_print = 0;
 						}
 						break;
 				case 15:
 						if(!ZF)
 						{
 							jump_setter = 1;
-							no_extra_print = 1;
+							no_extra_print = 1;other_jump = 1;
+							display_content[next_address]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
+							display_content[next_address]+=dec_to_hex(A)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(B)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(C)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(D)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(E)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(H)+"H"+" ";
+							display_content[next_address]+=dec_to_hex(L)+"H";
+							int temp = next_address;
 							error = JNZ(user_instruction,next_address); //
+							if(temp<next_address)no_extra_print = 0;
 						}
 						break;
 				case 16:
@@ -260,7 +303,6 @@ int main()
 						error = 1;
 						cout<<"You found a bug\n";
 			}
-			//cout<<display_content[next_address]<<"\n";
 			if(eof)break;
 			if(!jump_setter && !jump)
 			{
@@ -272,8 +314,9 @@ int main()
 				display_content[next_address]+=dec_to_hex(E)+"H"+" ";
 				display_content[next_address]+=dec_to_hex(H)+"H"+" ";
 				display_content[next_address]+=dec_to_hex(L)+"H";
-				next_address+=mnemonics[mne].second-'0';
+				if(!other_jump)next_address+=mnemonics[mne].second-'0';
 			}
+			other_jump = 0;	
 			jump = 0;
 			jump_setter = 0;
 		}
