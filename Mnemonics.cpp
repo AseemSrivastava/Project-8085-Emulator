@@ -28,7 +28,18 @@ unordered_map<string,pair<int,char>>mnemonics{
 	{"CMA",{25,'1'}},
 	{"CMP",{26,'1'}},
 	{"EOF",{27,'0'}},
-	{"HELP",{28,'0'}}
+	{"help",{28,'0'}},
+	{"break",{29,'0'}},
+	{"b",{30,'0'}},
+	{"run",{31,'0'}},
+	{"r",{32,'0'}},
+	{"step",{33,'0'}},
+	{"s",{34,'0'}},
+	{"print",{35,'0'}},
+	{"p",{36,'0'}},
+	{"quit",{37,'0'}},
+	{"q",{38,'0'}},
+	{"HELP",{39,'0'}}
 };	
 
 unordered_map<int,pair<int,string>>instruction_size{
@@ -59,7 +70,18 @@ unordered_map<int,pair<int,string>>instruction_size{
 	{25,{3,"CMA"}},
 	{26,{5,"CMP B"}},
 	{27,{3,"EOF"}},
-	{28,{4,"HELP"}}
+	{28,{4,"help"}},
+	{29,{11,"break 2500H"}},
+	{30,{7,"b 2500H"}},
+	{31,{3,"run"}},
+	{32,{1,"r"}},
+	{33,{4,"step"}},
+	{34,{1,"s"}},
+	{35,{5,"print"}},
+	{36,{1,"p"}},
+	{37,{4,"quit"}},
+	{38,{1,"q"}},
+	{39,{4,"HELP"}}
 };	
 
 unordered_map<char,int>char_to_int{
