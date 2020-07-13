@@ -3,9 +3,8 @@ using namespace std;
 string starting_address="";
 int next_address,end_address,A=0,B=0,C=0,D=0,E=0,H=0,L=0;
 bool SF=0,ZF=0,AC=0,PF=0,CF=0,error=0,bit_operation=0;
-unordered_map<int,string>display_content;
+unordered_map<int,string>display_content,address_instruction;
 unordered_map<int,int>address_data; //can be value or instruction
-unordered_map<int,string>address_instruction;
 #include"Mnemonics.cpp"
 #include"utility.cpp"
 #include"Arithmetic.cpp"
@@ -107,7 +106,7 @@ int main()
 		address_instruction[next_address] += user_instruction;
 		next_address+=mnemonics[mne].second-'0';
 	}
-
+	int temp;
 	bool eof=0,jump_setter=0,no_extra_print = 0,jump=0,other_jump = 0;
 	end_address = next_address;
 	next_address = hex_to_dec(starting_address);
@@ -181,8 +180,40 @@ int main()
 						display_content[next_address]+=dec_to_hex(E)+"H"+" ";
 						display_content[next_address]+=dec_to_hex(H)+"H"+" ";
 						display_content[next_address]+=dec_to_hex(L)+"H";
+						temp = next_address;
 						error = JMP(user_instruction,next_address);
+						no_extra_print = 1;
 						jump = 1;
+						if(temp<next_address)
+						{
+							for(int j=temp+1;j<next_address;++j)
+							{
+								if(address_instruction.find(j)!=address_instruction.end())
+								{
+									string user_instr = address_instruction[j];
+									string temp_addr = dec_to_hex(j);
+									if(temp_addr.size()!=4)
+									{
+										string tem;
+										for(int i=0;i<4-temp_addr.size();++i)tem.push_back('0');
+										tem+=temp_addr;
+										temp_addr=tem;
+									}
+									display_content[j]+=temp_addr+"H  ";
+									display_content[j]+=user_instr;
+									for(int i=display_content[j].size();i<=25;++i)display_content[j].push_back(' ');
+									display_content[j]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
+									display_content[j]+=dec_to_hex(A)+"H"+" ";
+									display_content[j]+=dec_to_hex(B)+"H"+" ";
+									display_content[j]+=dec_to_hex(C)+"H"+" ";
+									display_content[j]+=dec_to_hex(D)+"H"+" ";
+									display_content[j]+=dec_to_hex(E)+"H"+" ";
+									display_content[j]+=dec_to_hex(H)+"H"+" ";
+									display_content[j]+=dec_to_hex(L)+"H";
+								}
+							}
+							no_extra_print = 0;
+						}
 						break;
 				case 12:
 						if(CF)
@@ -198,9 +229,38 @@ int main()
 							display_content[next_address]+=dec_to_hex(E)+"H"+" ";
 							display_content[next_address]+=dec_to_hex(H)+"H"+" ";
 							display_content[next_address]+=dec_to_hex(L)+"H";
-							int temp = next_address;
+							temp = next_address;
 							error = JC(user_instruction,next_address);
-							if(temp<next_address)no_extra_print = 0;
+							if(temp<next_address)
+							{
+								for(int j=temp+1;j<next_address;++j)
+								{
+									if(address_instruction.find(j)!=address_instruction.end())
+									{
+										string user_instr = address_instruction[j];
+										string temp_addr = dec_to_hex(j);
+										if(temp_addr.size()!=4)
+										{
+											string tem;
+											for(int i=0;i<4-temp_addr.size();++i)tem.push_back('0');
+											tem+=temp_addr;
+											temp_addr=tem;
+										}
+										display_content[j]+=temp_addr+"H  ";
+										display_content[j]+=user_instr;
+										for(int i=display_content[j].size();i<=25;++i)display_content[j].push_back(' ');
+										display_content[j]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
+										display_content[j]+=dec_to_hex(A)+"H"+" ";
+										display_content[j]+=dec_to_hex(B)+"H"+" ";
+										display_content[j]+=dec_to_hex(C)+"H"+" ";
+										display_content[j]+=dec_to_hex(D)+"H"+" ";
+										display_content[j]+=dec_to_hex(E)+"H"+" ";
+										display_content[j]+=dec_to_hex(H)+"H"+" ";
+										display_content[j]+=dec_to_hex(L)+"H";
+									}
+								}
+									no_extra_print = 0;
+							}
 						}
 						break;
 				case 13:
@@ -217,9 +277,38 @@ int main()
 							display_content[next_address]+=dec_to_hex(E)+"H"+" ";
 							display_content[next_address]+=dec_to_hex(H)+"H"+" ";
 							display_content[next_address]+=dec_to_hex(L)+"H";
-							int temp = next_address;
+							temp = next_address;
 							error = JNC(user_instruction,next_address); //
-							if(temp<next_address)no_extra_print = 0;
+							if(temp<next_address)
+							{
+								for(int j=temp+1;j<next_address;++j)
+								{
+									if(address_instruction.find(j)!=address_instruction.end())
+									{
+										string user_instr = address_instruction[j];
+										string temp_addr = dec_to_hex(j);
+										if(temp_addr.size()!=4)
+										{
+											string tem;
+											for(int i=0;i<4-temp_addr.size();++i)tem.push_back('0');
+											tem+=temp_addr;
+											temp_addr=tem;
+										}
+										display_content[j]+=temp_addr+"H  ";
+										display_content[j]+=user_instr;
+										for(int i=display_content[j].size();i<=25;++i)display_content[j].push_back(' ');
+										display_content[j]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
+										display_content[j]+=dec_to_hex(A)+"H"+" ";
+										display_content[j]+=dec_to_hex(B)+"H"+" ";
+										display_content[j]+=dec_to_hex(C)+"H"+" ";
+										display_content[j]+=dec_to_hex(D)+"H"+" ";
+										display_content[j]+=dec_to_hex(E)+"H"+" ";
+										display_content[j]+=dec_to_hex(H)+"H"+" ";
+										display_content[j]+=dec_to_hex(L)+"H";
+									}
+								}
+								no_extra_print = 0;
+							}
 						}
 						break;
 				case 14:
@@ -236,9 +325,38 @@ int main()
 							display_content[next_address]+=dec_to_hex(E)+"H"+" ";
 							display_content[next_address]+=dec_to_hex(H)+"H"+" ";
 							display_content[next_address]+=dec_to_hex(L)+"H";
-							int temp = next_address;
+							temp = next_address;
 							error = JZ(user_instruction,next_address); //
-							if(temp<next_address)no_extra_print = 0;
+							if(temp<next_address)
+							{
+								for(int j=temp+1;j<next_address;++j)
+								{
+									if(address_instruction.find(j)!=address_instruction.end())
+									{
+										string user_instr = address_instruction[j];
+										string temp_addr = dec_to_hex(j);
+										if(temp_addr.size()!=4)
+										{
+											string tem;
+											for(int i=0;i<4-temp_addr.size();++i)tem.push_back('0');
+											tem+=temp_addr;
+											temp_addr=tem;
+										}
+										display_content[j]+=temp_addr+"H  ";
+										display_content[j]+=user_instr;
+										for(int i=display_content[j].size();i<=25;++i)display_content[j].push_back(' ');
+										display_content[j]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
+										display_content[j]+=dec_to_hex(A)+"H"+" ";
+										display_content[j]+=dec_to_hex(B)+"H"+" ";
+										display_content[j]+=dec_to_hex(C)+"H"+" ";
+										display_content[j]+=dec_to_hex(D)+"H"+" ";
+										display_content[j]+=dec_to_hex(E)+"H"+" ";
+										display_content[j]+=dec_to_hex(H)+"H"+" ";
+										display_content[j]+=dec_to_hex(L)+"H";
+									}
+								}
+								no_extra_print = 0;
+							}
 						}
 						break;
 				case 15:
@@ -254,9 +372,37 @@ int main()
 							display_content[next_address]+=dec_to_hex(E)+"H"+" ";
 							display_content[next_address]+=dec_to_hex(H)+"H"+" ";
 							display_content[next_address]+=dec_to_hex(L)+"H";
-							int temp = next_address;
+							temp = next_address;
 							error = JNZ(user_instruction,next_address); //
-							if(temp<next_address)no_extra_print = 0;
+							if(temp<next_address){
+								for(int j=temp+1;j<next_address;++j)
+								{
+									if(address_instruction.find(j)!=address_instruction.end())
+									{
+										string user_instr = address_instruction[j];
+										string temp_addr = dec_to_hex(j);
+										if(temp_addr.size()!=4)
+										{
+											string tem;
+											for(int i=0;i<4-temp_addr.size();++i)tem.push_back('0');
+											tem+=temp_addr;
+											temp_addr=tem;
+										}
+										display_content[j]+=temp_addr+"H  ";
+										display_content[j]+=user_instr;
+										for(int i=display_content[j].size();i<=25;++i)display_content[j].push_back(' ');
+										display_content[j]+=to_string(SF)+"  "+to_string(ZF)+"  "+to_string(AC)+"  "+to_string(PF)+"  "+to_string(CF)+"  ";
+										display_content[j]+=dec_to_hex(A)+"H"+" ";
+										display_content[j]+=dec_to_hex(B)+"H"+" ";
+										display_content[j]+=dec_to_hex(C)+"H"+" ";
+										display_content[j]+=dec_to_hex(D)+"H"+" ";
+										display_content[j]+=dec_to_hex(E)+"H"+" ";
+										display_content[j]+=dec_to_hex(H)+"H"+" ";
+										display_content[j]+=dec_to_hex(L)+"H";
+									}
+								}
+								no_extra_print = 0;
+							}
 						}
 						break;
 				case 16:
