@@ -9,7 +9,7 @@ unordered_map<int,int>address_data; //can be value or instruction
 #include"conversion.cpp"			//Used to conversion from hex-to-dec and vice-versa
 #include"Arithmetic_Instructions.cpp" //For flag and Arithmetic operations
 #include"Branching_Instructions.cpp"	//For Branching Instructions
-#include"LoadAndStoreInstructions.cpp" //Includes code for Loading and Storing the values in registers
+#include"DataTransfer.cpp" //Includes code for transfering data among registers and memory location
 #include"Logical_Instructions.cpp"		//Includes code for compare and compliment
 #include"message.cpp"
 

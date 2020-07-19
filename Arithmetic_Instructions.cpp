@@ -1,41 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-
-
-
-
-int flag_on_off_8bit_SUB(int &val1,int &val2)
-{
-	if(val1<val2)SF=CF=1;
-	int tmp_val2 = val2^255;
-	++tmp_val2;
-	if((val1&15)+(tmp_val2&15)>15)AC=1;
-	int val=val1-val2;
-	int parity_checker_bit = 1;
-	int parity_counter = 0;
-	for(int i=0;i<8;++i)
-	{
-		if(parity_checker_bit&val)++parity_counter;
-		parity_checker_bit<<=1;
-	}
-	PF = 1;
-	if(parity_counter&1)PF = 0;
-	if(!val)ZF=1;
-	if(val<0)
-	{
-		val*=-1;
-	}
-	return val;
-}
-
-int flag_on_off_8bit_SUB(int &val1)
-{
-	PF = 1;
-	ZF = 1;
-	return 0;
-}
-
 int flag_on_off_8bit_ADD(int &val1)
 {
 	if((val1&15)+(val1&15)>15)AC=1;
@@ -81,6 +46,38 @@ int flag_on_off_8bit_ADD(int &val1,int &val2)
 	if(val<0)SF=1;
 	return val;
 }	
+
+int flag_on_off_8bit_SUB(int &val1,int &val2)
+{
+	if(val1<val2)SF=CF=1;
+	int tmp_val2 = val2^255;
+	++tmp_val2;
+	if((val1&15)+(tmp_val2&15)>15)AC=1;
+	int val=val1-val2;
+	int parity_checker_bit = 1;
+	int parity_counter = 0;
+	for(int i=0;i<8;++i)
+	{
+		if(parity_checker_bit&val)++parity_counter;
+		parity_checker_bit<<=1;
+	}
+	PF = 1;
+	if(parity_counter&1)PF = 0;
+	if(!val)ZF=1;
+	if(val<0)
+	{
+		val*=-1;
+	}
+	return val;
+}
+
+int flag_on_off_8bit_SUB(int &val1)
+{
+	PF = 1;
+	ZF = 1;
+	return 0;
+}
+
 void ADD(string &user_instruction)
 {
 	SF=0,ZF=0,AC=0,PF=0,CF=0;
