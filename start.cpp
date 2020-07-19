@@ -4,12 +4,12 @@ string starting_address="";
 int next_address,end_address,A=0,B=0,C=0,D=0,E=0,H=0,L=0;
 bool SF=0,ZF=0,AC=0,PF=0,CF=0,error=0,bit_operation=0;
 unordered_map<int,string>display_content,address_instruction;
-unordered_map<int,int>address_data; //can be value or instruction
-#include"InstructionList.cpp"		//Stores the list of all the instructions available.
-#include"conversion.cpp"			//Used to conversion from hex-to-dec and vice-versa
-#include"Arithmetic_Instructions.cpp" //For flag and Arithmetic operations
+unordered_map<int,int>address_data; 	//can be value or instruction
+#include"InstructionList.cpp"			//Stores the list of all the instructions available.
+#include"conversion.cpp"				//Used to conversion from hex-to-dec and vice-versa
+#include"Arithmetic_Instructions.cpp" 	//For flag and Arithmetic operations
 #include"Branching_Instructions.cpp"	//For Branching Instructions
-#include"DataTransfer.cpp" //Includes code for transfering data among registers and memory location
+#include"DataTransfer.cpp" 				//Includes code for transfering data among registers and memory location
 #include"Logical_Instructions.cpp"		//Includes code for compare and compliment
 #include"message.cpp"
 

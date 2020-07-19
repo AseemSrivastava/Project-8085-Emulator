@@ -251,8 +251,38 @@ This Project includes following files:
 
 
 # Logical_Instructions.cpp
-#message.cpp
-#start.cpp
+	-> This file include two instructions:-
+		-> CMA:- Used to complement the content of acuumulator.
+			-> In 8085 Instruction set, logical type there is one complement instruction with the mnemonic CMA. It actually stands for “CoMplement the Accumulator”. It performs1's complement operation on the current contents of Accumulator, and the result is stored back in the Accumulator replacing its previous contents. It is to be noted that, there are no other instructions tocomplement any other register’s contents. Though it is a logicaltype of instruction, Flag bits are not affected by the execution of this instruction. It occupies only 1 Byte in memory.
+
+			-> Syntax:- CMA 
+
+		-> CMP:- Used to compare the contents of two registers.
+			-> Compare (register or memory) with accumulator (CMP R/M) –
+				This is a 1-byte instruction. It compares the data byte in the register or memory with the contents of accumulator.
+
+    		-> If A less than (R/M), the CY flag is set and Zero flag is 	reset.
+    		-> If A equals to (R/M), the Zero flag is set and CY flag is 	reset.
+    		-> If A greater than (R/M), the CY and Zero flag are reset.
+
+			-> When memory is an operand, its address is specified by HL Pair. No contents are modified; however all remaining flags    (S, P, AC) are affected according to the result of subtraction.
+
+			-> Syntax:- CMP B
+
+# message.cpp
+	-> Used to print helping statement
+
+# start.cpp
+	-> It is the main file and the execution of program will start from this file only.
+
+# to run the program ( in linux )
+	-> goto the folder path where all files are extracted using terminal
+	-> and in terminal run the following cmd:
+		g++ start.cpp
+		./a.out
+
+# note
+	-> the following program is tested on ubuntu 20.04(LTS)
 
 
 
