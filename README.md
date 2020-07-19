@@ -282,15 +282,4 @@ This Project includes following files:
 		./a.out
 
 # note
-	-> the following program is tested on ubuntu 20.04(LTS)
-
-
-
-
-
-
-
-
-
-
-
+	-> the following program is tested and compiled on ubuntu 20.04(LTS) with g++ (Ubuntu 9.3.0-10ubuntu2) 9.3.0 compiler.
