@@ -36,5 +36,11 @@ void help()
 
 void help_debug()
 {
-	cout<<"helping debug\n";
+	cout<<"Debugger Instructions\n
+	 	SET Ex:- SET 2500H, 05H\n
+		break or b Ex:- break 2500H or b 2500H\n
+		step or s Ex:- step or s\n
+		print or p Ex:- print A or p B or print 2500H or p 5000H\n
+		quit or q Ex:- quit or q\n
+		help Ex:- help\n\n";
 }
